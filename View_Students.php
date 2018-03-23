@@ -39,10 +39,11 @@ if(isset($_GET['rs_id']))
             <input type="submit" class="btn btn-primary " name="btnsearch" value="Search"/>
             <!--a href="?tag=student_entry"><input type="button" class="btn btn-large btn-primary" value="Register new" name="butAdd"/>
             </a-->        
-            <input type="text" name="rfid" class="input_box_pos form-control" placeholder="RFID.." />
+            <input type="text" name="rfid" class="input_box_pos form-control" placeholder="Search RFID card " />
             <input type="submit" class="btn btn-primary " name="rfid" value="rfid"/>
-            <!--a href="?tag=student_entry"><input type="button" class="btn btn-large btn-primary" value="Register new" name="butAdd"/>
-            </a-->        
+             
+             <input type="text" name="dob" class="input_box_pos form-control" placeholder="Search Date of Birth " />
+            <input type="submit" class="btn btn-primary " name="dob" value="dob"/>
         </form>
 
     </div><br><br>
@@ -58,7 +59,7 @@ if(isset($_GET['rs_id']))
             <th style="text-align: center;">Student Name</th>
             <th style="text-align: center;">Gender</th>
             <th style="text-align: center;">Date of Birth</th>
-            <th style="text-align: center;">Place of Birth</th>
+            <th style="text-align: center;">Birth Location</th>
             <th style="text-align: center;">Address</th>
             <th style="text-align: center;">Phone</th>
             <th style="text-align: center;">E-mail</th>
@@ -67,40 +68,43 @@ if(isset($_GET['rs_id']))
             <th style="text-align: center;" colspan="2">Operation</th>
         </tr>
         
-        <?php
+<?php
 	$key="";
     $ky="";
+    $ky1="";
+
 	if(isset($_POST['searchtxt']))
 		$key=$_POST['searchtxt'];
+
+    if(isset($_POST['dob']))
+        $ky1=$_POST['dob'];
 
 	if(isset($_POST['rfid']))
         $ky=$_POST['rfid'];
 
 	if($key !="")
-		$sql_sel=mysql_query("SElECT * FROM stu_tbl WHERE f_name  like '%$key%' or l_name like '%$key%'");
-	else
-		 $sql_sel=mysql_query("SELECT * FROM stu_tbl");
+        $sql_sel=mysql_query("SELECT * FROM stu_tbl WHERE f_name  like '%$key%' or l_name like '%$key%'");
+	
+    elseif($ky !="")
+       $sql_sel=mysql_query("SELECT * FROM stu_tbl WHERE rfid  like '%$ky%' ");
 
-    if($ky !="")
-        $sql_sel=mysql_query("SElECT * FROM stu_tbl WHERE rfid like '%$ky%' ");
+    elseif($ky1 !="")
+       $sql_sel=mysql_query("SELECT * FROM stu_tbl WHERE dob  like '%$ky1%' ");
+    
     else
          $sql_sel=mysql_query("SELECT * FROM stu_tbl");
-
-
-	
-		
        
     $i=0;
     while($row=mysql_fetch_array($sql_sel)){
-    $i++;
-    ?>
+    $i++;   
+?>
 
 
 
      
       <tr>
             <td><?php echo $i;?></td>
-            <td><?php echo $row['f_name']."    ".$row['l_name'];?></td>
+            <td><?php echo $row['f_name']."   ".$row['l_name'];?></td>
             <td><?php echo $row['gender'];?></td>
             <td><?php echo $row['dob'];?></td>
             <td><?php echo $row['pob'];?></td>
