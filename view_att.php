@@ -16,13 +16,11 @@
         <form method="post">
             <input type="text" name="searchtxt" class="input_box_pos form-control" placeholder="Search name.." />
             <div class="btn_pos_search">
-            <input type="submit" class="btn btn-primary btn-large" value="Search"/>&nbsp;&nbsp;
-            <input type="text" name="date1" class="input_box_pos form-control" placeholder="Date.." />
-            <input type="submit" class="btn btn-primary " name="date1" value="date"/>
+                 <input type="submit" class="btn btn-primary btn-large" value="Search"/>&nbsp;&nbsp;
+                 <input type="text" name="date1" class="input_box_pos form-control" placeholder="Date.." />
+                 <input type="submit" class="btn btn-primary " name="date1" value="date"/>
            
             </div>
-
-
         </form>
     </div><br><br>
     
@@ -53,13 +51,13 @@
     
     if($key !="")
         $sql_sel=mysql_query("SELECT * FROM attendance WHERE uuid  like '%$key%' or subject like '%$key%'");
+    
+    elseif($ky !="")
+        $sql_sel=mysql_query("SELECT * FROM attendance WHERE date like '%$ky%' or time like '%$ky%'");
+
     else
         $sql_sel=mysql_query("SELECT * FROM attendance");
 
-    if($ky !="")
-        $sql_sel=mysql_query("SELECT * FROM attendance WHERE date like '%$ky%'");
-   // else
-    //   $sql_sel=mysql_query("SELECT * FROM attendance");
 
         
     $i=0;
